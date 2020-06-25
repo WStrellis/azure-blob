@@ -9,7 +9,7 @@ Run the following command to get the login credentials :
 `az ad sp create-for-rbac --name "myApp" --role contributor \  
                             --scopes /subscriptions/{subscription-id}/resourceGroups/{resource-group} \  
                             --sdk-auth`  
-Copy and paste the value of the output object into Github as the AZURE_CREDENTIALS.
+Copy and paste the entire response object into Github as the AZURE_CREDENTIALS.
 
 Run the following command to get the connection string for the target storage account:  
 `az storage account show-connection-string -g MyResourceGroup -n MyStorageAccount`  
