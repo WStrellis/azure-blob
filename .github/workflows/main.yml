@@ -1,26 +1,31 @@
-# This is a basic workflow to help you get started with Actions
+on: [push]
 
-name: CI
+name: Deploy Web App
 
-# Controls when the action will run. Triggers the workflow on push or pull request
-# events but only for the master branch
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+on: push
 
-    
-        
 jobs:
-  build:
-
-    
+  build-and-deploy:
     runs-on: ubuntu-latest
-    steps: 
-    - uses: actions/checkout@v2
-    - uses: tibor19/static-website-deploy@v1
+    steps:
+    # checkout the repo
+    - name: 'Checkout Github Action' 
+      uses: actions/checkout@master
+    
+    - name: Setup Node 10.x
+      uses: actions/setup-node@v1
       with:
-        enabled-static-website: 'true'
-        folder: 'build'
-        connection-string: ${{ secrets.AZURE_CONNECTION_STRING }}
+        node-version: '10.x'
+    - name: 'npm install, build, and test'
+      run: |
+        npm install
+        npm run build --if-present
+        npm run test --if-present
+       
+    - name: 'Update app'
+      uses: azure/CLI@v1
+      with:
+        azcliversion: latest
+        inlineScript: |
+            az storage blob delete-batch -s "build"  --connection-string ${{secrets.AZURE_CONNECTION_STRING}}
+            az storage blob upload-batch -s "build" -d '$web'  --connection-string ${{secrets.AZURE_CONNECTION_STRING}}
