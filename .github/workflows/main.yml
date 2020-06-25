@@ -26,7 +26,6 @@ jobs:
         creds: ${{secrets.AZURE_CREDENTIALS}}
        
     - name: 'Update app'
-      uses: azure/CLI@v1
       run: |
             az storage blob delete-batch -s "build"  --connection-string ${{secrets.AZURE_CONNECTION_STRING}};
             az storage blob upload-batch -s "build" -d '$web'  --connection-string ${{secrets.AZURE_CONNECTION_STRING}};
