@@ -1,6 +1,6 @@
 name: Deploy Web App
 
-on: push
+on: [push,pull_request]
 
 jobs:
   build-and-deploy:
