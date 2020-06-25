@@ -27,8 +27,11 @@ jobs:
        
     - name: 'Update app'
       uses: azure/CLI@v1
-      with:
-        azcliversion: latest
-        inlineScript: |
-            az storage blob delete-batch -s "build"  --connection-string ${{secrets.AZURE_CONNECTION_STRING}}
-            az storage blob upload-batch -s "build" -d '$web'  --connection-string ${{secrets.AZURE_CONNECTION_STRING}}
+      run: |
+            az storage blob delete-batch -s "build"  --connection-string ${{secrets.AZURE_CONNECTION_STRING}};
+            az storage blob upload-batch -s "build" -d '$web'  --connection-string ${{secrets.AZURE_CONNECTION_STRING}};
+    #   with:
+    #     azcliversion: latest
+    #     inlineScript: |
+    #         az storage blob delete-batch -s "build"  --connection-string ${{secrets.AZURE_CONNECTION_STRING}};
+    #         az storage blob upload-batch -s "build" -d '$web'  --connection-string ${{secrets.AZURE_CONNECTION_STRING}};
