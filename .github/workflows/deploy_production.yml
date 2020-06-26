@@ -1,6 +1,8 @@
-name: Deploy Web App
+name: Deploy To Production 
 
-on: [push,pull_request]
+on: 
+  push:
+    branches: master
 
 jobs:
   build-and-deploy:
