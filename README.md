@@ -1,4 +1,6 @@
-## Deploy a SPA to Azure Storage with automatic deployment via Github Actions.
+## Deploy a SPA to Azure Storage with automatic deployment via Github Actions.  
+
+[Example application](https://westleysazurestorage.z13.web.core.windows.net/)  
 
 ## Create Github Repository 
 Create a new, empty repository on Github.  
